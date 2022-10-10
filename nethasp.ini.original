@@ -1,0 +1,82 @@
+
+;
+; NetHASP Configuration file syntax.
+;
+;
+; Note:
+;
+; All text lines were commented.
+; Remove comments in the lines you want to use.
+;
+
+
+[NH_COMMON]
+
+;
+; Section-specific Keywords
+;
+
+;
+; You can set either of the following two Keywords to "Enabled"!
+;
+;;NH_IPX = Enabled or Disabled 		; Use the IPX protocol
+;;NH_TCPIP = Enabled or Disabled	; Use the TCP/IP protocol
+
+;
+; General Keywords
+;
+;;NH_SESSION = <Num>			; See Adapting the Timeout Length 
+;;NH_SEND_RCV = <Num>			; in the HASP Programmer's Guide.
+
+
+
+[NH_IPX]
+
+;
+; Section-specific Keywords for the IPX protocol.
+;
+
+;;NH_USE_BROADCAST = Enabled or Disabled; Use IPX Broadcast mechanism.
+					; Default:  Enabled
+
+;;NH_DATFILE_PATH = <path>		; Specify the location of the NetHASP 
+					; License Manager's address file.
+
+;
+; General Keywords
+;
+;;NH_SESSION = <Num>			; See Adapting the Timeout Length 
+;;NH_SEND_RCV = <Num>			; in the HASP Programmer's Guide.
+
+
+
+[NH_TCPIP]
+
+;
+; Section-specific Keywords for the TCP/IP protocol.
+;
+
+;;NH_SERVER_ADDR = <Addr1>, <Addr2> 	; IP addresses of all the NetHASP 
+					; License Managers you want to search.
+					; Unlimited addresses and multiple
+					; lines are possible.
+					;
+					; Possible address format examples:
+					;  IP address:      192.114.176.65
+					;  Local Hostname:  ftp.aladdin.co.il
+
+;;NH_SERVER_ADDR =       ; Ensures that HASP LM will be found on local machine
+                                ; (on some systems broadcast is not visible locally)
+
+;;NH_PORT_NUMBER = <Num>		; Set the TCP/IP port number. This is
+					; optional. The default number is 475.
+
+;;NH_USE_BROADCAST = Enabled or Disabled; Use TCPI/IP Broadcast mechanism.
+					; Default:  Enabled
+
+;
+; General Keywords.
+;
+;;NH_SESSION = <Num>			; See Adapting the Timeout Length 
+;;NH_SEND_RCV = <Num>			; in the HASP Programmer's Guide.
+
