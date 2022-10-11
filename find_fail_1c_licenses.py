@@ -61,9 +61,10 @@ INFO_DELIMETER = ','
 PARAM_DELIMETER = '='
 
 # Разделитель
-DEFAULT_DELIMETER = ';\t'
-ALTER_DELIMETER = u',\t'
+DEFAULT_DELIMETER = ';'
+ALTER_DELIMETER = u','
 # COMMENT_SIGNATURE = '#'
+TABLE_FMT = '{0:<30}{1:<20}{2:<5}'
 
 # Кодировка командной оболочки по умолчанию
 DEFAULT_ENCODING = sys.stdout.encoding if sys.platform.startswith('win') else locale.getpreferredencoding()
@@ -474,9 +475,11 @@ def _run(id):
             dst_filename = CUR_FILENAME
     # Сохраняем результат
     if dst_filename:
+        # txt = os.linesep.join(
+        #     [DEFAULT_DELIMETER.join((license['NAME'], license['PROT'], str(license['TIMEOUT']))) for license in
+        #      licenses])
         txt = os.linesep.join(
-            [DEFAULT_DELIMETER.join((license['NAME'], license['PROT'], str(license['TIMEOUT']))) for license in
-             licenses])
+            [TABLE_FMT.format(license['NAME']+DEFAULT_DELIMETER, license['PROT']+DEFAULT_DELIMETER, str(license['TIMEOUT'])+DEFAULT_DELIMETER) for license in licenses])
         saveTextFile(dst_filename, txt)
 
     # Производим анализ
@@ -485,10 +488,9 @@ def _run(id):
         cur_lines = [line.split(DEFAULT_DELIMETER) for line in readTextFileLines(CUR_FILENAME)]
         for line in cur_lines:
             if not line[0].strip():
-                find_line = [prev_line for prev_line in prev_lines if prev_line[1] == line[1] and prev_line[0].strip()]
+                find_line = [prev_line for prev_line in prev_lines if prev_line[1].strip() == line[1].strip() and prev_line[0].strip()]
                 if find_line:
-                    txt_line = datetime.datetime.now().strftime(DATETIME_FMT) + u'\t' + DEFAULT_DELIMETER.join(
-                        find_line[0])
+                    txt_line = datetime.datetime.now().strftime(DATETIME_FMT) + u'\t' + TABLE_FMT.format(*find_line[0])
                     appendTextFileLine(txt_line, FIND_FILENAME)
 
 
