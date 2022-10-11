@@ -235,7 +235,7 @@ def saveTextFile(txt_filename, txt='', rewrite=True):
 
         # Check path
         txt_dirname = os.path.dirname(txt_filename)
-        if not os.path.exists(txt_dirname):
+        if txt_dirname and not os.path.exists(txt_dirname):
             os.makedirs(txt_dirname)
 
         file_obj = open(txt_filename, 'wt')
