@@ -4,7 +4,7 @@
 """
 Поиск хостов которые не освобождают лицензии 1с.
 Поиск производится с помощью утилиты HaspMonitor.exe
-Программа запускается в планировщике задач cron.
+Программа запускается в планировщике задач cron (crontab -e).
 Правило запуска:
 */5 * * * * python3 /home/user/prg/find_fail_1c_licenses/find_fail_1c_licenses.py --debug 1>/home/user/prg/stdout_find_fail_1c_licenses.log 2>/home/user/prg/error_find_fail_1c_licenses.log
 
@@ -35,8 +35,9 @@ __version__ = (0, 0, 0, 1)
 DEBUG_MODE = False
 
 # Домашняя папка
-HOME_PATH = os.environ['HOME'] if 'HOME' in os.environ else (os.environ.get('HOMEDRIVE',
-                                                                            '') + os.environ.get('HOMEPATH', ''))
+# HOME_PATH = os.environ['HOME'] if 'HOME' in os.environ else (os.environ.get('HOMEDRIVE',
+#                                                                             '') + os.environ.get('HOMEPATH', ''))
+SAVE_DIRNAME = os.path.dirname(__file__) if __file__ else ''
 
 # Наименование результирующего файла по умолчанию
 DEFAULT_PREV_FILENAME = 'hasp_monitor.prev'
@@ -44,9 +45,9 @@ DEFAULT_CUR_FILENAME = 'hasp_monitor.cur'
 DEFAULT_FIND_FILENAME = 'hasp_monitor.find'
 
 # Полное наименование результирующего файла
-PREV_FILENAME = os.path.join(HOME_PATH, DEFAULT_PREV_FILENAME)
-CUR_FILENAME = os.path.join(HOME_PATH, DEFAULT_CUR_FILENAME)
-FIND_FILENAME = os.path.join(HOME_PATH, DEFAULT_FIND_FILENAME)
+PREV_FILENAME = os.path.join(SAVE_DIRNAME, DEFAULT_PREV_FILENAME)
+CUR_FILENAME = os.path.join(SAVE_DIRNAME, DEFAULT_CUR_FILENAME)
+FIND_FILENAME = os.path.join(SAVE_DIRNAME, DEFAULT_FIND_FILENAME)
 
 DATETIME_FMT = '%Y-%m-%d %H:%M:%S'
 
